@@ -50,4 +50,16 @@ class ReunionTest < Minitest::Test
     assert_equal -0.5, @reunion.activities[0].participants[0][:owed]
     assert_equal 0.5, @reunion.activities[0].participants[1][:owed]
   end
+
+  def test_reunion_can_print_amounts_owed_per_participant
+    @reunion.activities[0].add_participants({name: "Sam", paid: 4})
+    @activity_2.add_participants({name: "William", paid: 5})
+    @reunion.add_activity(@activity_2)
+
+    @reunion.calculate_all_amounts_owed_per_participant
+    amount_printout = @reunion.all_amounts_owed_printout
+
+    assert_instance_of String, amount_printout
+    assert_equal "Bob owes -0.5 dollars\nSam owes 0.5 dollars\nWallace owes -2.0 dollars\nWilliam owes 2.0 dollars", amount_printout
+  end
 end
