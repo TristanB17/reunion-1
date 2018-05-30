@@ -41,19 +41,24 @@ class ActivityTest < Minitest::Test
     assert_equal 6, @activity.calculate_cost_per_person
   end
 
-  def test_an_activity_can_add_calculate_fore_more_than_two_participants
-    @activity.add_participants({name: "Dan", paid: 7})
-    @activity.add_participants({name: "Wolfgang Amadeus Mozart", paid: 13})
-
-    assert_equal 25, @activity.calculate_total_cost
-    assert_equal 8.33, @activity.calculate_cost_per_person
-  end
-
   def test_an_activity_can_calculate_amount_owed_per_participant
     @activity.add_participants({name: "Dan", paid: 7})
     payout = @activity.calculate_amount_owed_per_participant
 
     assert_equal 1, payout[0][:owed]
     assert_equal -1, payout[1][:owed]
+  end
+
+  def test_an_activity_can_add_calculate_for_more_than_two_participants
+    @activity.add_participants({name: "Dan", paid: 7})
+    @activity.add_participants({name: "Wolfgang Amadeus Mozart", paid: 13})
+    payout = @activity.calculate_amount_owed_per_participant
+
+
+    assert_equal 25, @activity.calculate_total_cost
+    assert_equal 8.33, @activity.calculate_cost_per_person
+    assert_equal 3.33, payout[0][:owed]
+    assert_equal 1.33, payout[1][:owed]
+    assert_equal -4.67, payout[2][:owed]
   end
 end
