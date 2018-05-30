@@ -5,5 +5,9 @@ class Reunion
   def initialize(location, activity)
     @location = location
     @activities = [activity]
-  end 
+  end
+
+  def add_activity(activity)
+    @activities << activity
+  end
 end

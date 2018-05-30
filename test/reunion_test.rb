@@ -19,4 +19,12 @@ class ReunionTest < Minitest::Test
     assert_equal "Bob", @reunion.activities[0].participants[0][:name]
     assert_equal 5, @reunion.activities[0].participants[0][:paid]
   end
+
+  def test_a_reunion_can_add_activities
+    activity_2 = Activity.new("Bruncheon", ({name: "Wallace", paid: 9}))
+    @reunion.add_activity(activity_2)
+
+    assert_equal activity_2, @reunion.activities[1]
+    assert_equal "Bruncheon", @reunion.activities[1].name
+  end
 end
