@@ -24,11 +24,11 @@ class Reunion
   end
 
   def all_amounts_owed_printout
-    good = []
+    persons = []
     @activities.each do |activity|
-      good << activity.participants
+      persons << activity.participants
     end
-    isolate(good.flatten)
+    isolate(persons.flatten)
   end
 
   def isolate(persons)
