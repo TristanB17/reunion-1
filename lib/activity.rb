@@ -22,7 +22,7 @@ class Activity
   end
 
   def calculate_amount_owed_per_participant
-    with_owed = @participants.each do |participant|
+    @participants.each do |participant|
       participant[:owed] = calculate_cost_per_person - participant[:paid]
     end
   end
