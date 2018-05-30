@@ -26,5 +26,4 @@ class Activity
       participant[:owed] = calculate_cost_per_person - participant[:paid]
     end
   end
-
 end
